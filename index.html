@@ -105,7 +105,6 @@
             background: #064e45;
         }
 
-        /* Optional: scrollbar styling */
         .messages::-webkit-scrollbar {
             width: 6px;
         }
@@ -150,7 +149,7 @@
             const loadingMsg = addMessage('Politics Café is typing...', 'bot');
 
             try {
-                const response = await fetch('http://127.0.0.1:5000/chat', {
+                const response = await fetch('/chat', {  // ✅ NO need to hardcode the full URL now
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ message: message })

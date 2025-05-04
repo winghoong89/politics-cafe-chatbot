@@ -1,18 +1,22 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
 from openai import OpenAI
-import os  # ✅ Add this to load ENV VAR
+import os
 
 app = Flask(__name__)
 CORS(app)
 
-# ✅ Load API key from environment variable (much safer)
+# ✅ Load API key from environment variable
 api_key = os.getenv('OPENAI_API_KEY')
-
 if not api_key:
     raise ValueError("🚨 OPENAI_API_KEY environment variable is not set.")
 
 client = OpenAI(api_key=api_key)
+
+@app.route('/')
+def home():
+    # Renders index.html from the 'templates' folder
+    return render_template('index.html')
 
 @app.route('/chat', methods=['POST'])
 def chat():
